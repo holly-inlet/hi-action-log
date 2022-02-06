@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date
 
 
-debug = False
+DEBUG = True
 
 
 app = Flask(__name__)
@@ -73,4 +73,4 @@ def delete(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=debug)
+    app.run(debug=DEBUG)

@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date
 
 
-DEBUG = True
+DEBUG = False
 
 
 app = Flask(__name__)

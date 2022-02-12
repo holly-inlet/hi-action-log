@@ -2,20 +2,59 @@
 
 {% block body %}
 <div class="container">
-    <a class="btn btn-info btn-lg m-5" href="/create" role="button">Create New Task</a>
+    <form class="row my-5 align-items-center" action="/" method="POST">
+        <div class="col-auto">
+            <label for="date" class="h4">Create New Task :　</label>
+            <input type="date" name="date" value={{ today.date() }} required>
+            <input type="time" name="time" required>
+        </div>
+        <div class="col-4">
+            <input type="text" name="task" class="form-control" placeholder="Task">
+        </div>
+        <div class="col-auto">
+            <select type="text" name="tag" class="form-select">
+                <option selected>Tag</option>
+                <option value="Sleep">Sleep</option>
+                <option value="Rest">Rest</option>
+                <option value="Task">Task</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+
+    <div class="row my-4 fw-bold align-items-center">
+        <div class="col-2 me-4 text-center">開始時間</div>
+        <div class="col-5 me-5 text-center">タスク</div>
+        <div class="col-2 text-center">使用時間</div>
+    </div>
     {% for post in posts %}
-    <div class="card w-50 mb-3" style="margin: auto;">
-        <div class="card-body">
-            {% if post.due.date() < today %}
-            <div class="alert alert-warning" role="alert">
-                期限切れです！
-            </div>
-            {% endif %}
-            <h2 class="card-title">{{ post.title }}</h2>
-            <p>期限 : {{ post.due.date() }}</p>
-            <a class="btn btn-secondary btn-sm" href="/detail/{{ post.id }}" role="button">Detail</a>
-            <a class="btn btn-success btn-sm" href="/update/{{ post.id }}" role="button">Update</a>
-            <a class="btn btn-danger btn-sm" href="/delete/{{ post.id }}" role="button">Delete</a>
+    <div class="row my-2 align-items-center">
+        <div class="col-2 me-4">{{ post.start_time.date() }} {{ post.start_time.time() }}</div>
+
+        {% if post.tag == 'Sleep' %}
+            <div class="col-5 me-5 bg-primary">{{ post.task }}</div>
+        {% elif post.tag == 'Rest' %}
+            <div class="col-5 me-5 bg-success">{{ post.task }}</div>
+        {% elif post.tag == 'Task' %}
+            <div class="col-5 me-5 bg-warning">{{ post.task }}</div>
+        {% elif post.tag == 'Other' %}
+            <div class="col-5 me-5 bg-secondary">{{ post.task }}</div>
+        {% endif %}
+
+        {% if post.duration == None %}
+            <div class="col-2"></div>
+        {% else %}
+            <div class="col-2">{{ post.duration }}</div>
+        {% endif %}
+
+        <div class="col-auto">
+            <a class="btn btn-outline-danger btn-sm" href="/update/{{ post.id }}" role="button">Update</a>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-outline-dark btn-sm" href="/delete/{{ post.id }}" role="button">Delete</a>
         </div>
     </div>
     {% endfor %}

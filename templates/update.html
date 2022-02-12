@@ -4,17 +4,18 @@
 <h2 class="m-5">編集</h2>
 <form class="m-5" action="/update/{{ post.id }}" method="POST">
     <div class="form-group pb-3">
-        <label for="title">Title : </label>
-        <input type="text" class="form-control" name="title" aria-describedby="title-help" value={{ post.title }}>
-        <small id="title-help" class="form-text text-muted">To Doを入力してください</small>
+        <label for="task">Task : </label>
+        <input type="text" class="form-control" name="task" aria-describedby="task-help" value={{ post.task }}>
+        <small id="task-help" class="form-text text-muted">To Doを入力してください</small>
     </div>
     <div class="form-group pb-3">
-        <label for="detail">Detail : </label>
-        <input type="text" class="form-control" name="detail" value={{ post.detail }}>
+        <label for="tag">Tag : </label>
+        <input type="text" class="form-control" name="tag" value={{ post.tag }}>
     </div>
     <div class="form-group pb-3">
-        <label for="due">Due : </label>
-        <input type="date" name="due"  value={{ post.due.date() }} required>
+        <label for="time">Start Time : </label>
+        <input type="date" name="date"  value={{ post.start_time.date() }} required>
+        <input type="time" name="time"  value={{ post.start_time.time() }} required>
     </div>
     <a class="btn btn-outline-primary" href="/" role="button">Return</a>
     <button type="submit" class="btn btn-primary">Create</button>

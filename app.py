@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 
-DEBUG = True
+DEBUG = False
 
 
 app = Flask(__name__)
